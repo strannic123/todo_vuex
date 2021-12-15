@@ -27,7 +27,6 @@
 
         >
           {{todo.text}}
-          {{todo.id}}
         </div>
         <div
             v-else>
