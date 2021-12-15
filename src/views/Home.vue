@@ -49,8 +49,8 @@
         <router-link @click.native="filterActive('active')" to='/active' tag="button">Active</router-link>
         <router-link @click.native="filterActive('completed')" to='/completed' tag="button">Completed</router-link>
       </div>
-      <div class="right-group">
-        <span>Clear Completed</span>
+      <div class="right-group" >
+        <span :class="{'hide': !oneCompleted}">Clear Completed</span>
       </div>
     </div>
   </div>
@@ -71,25 +71,35 @@ export default {
     todoId() {
       return this.$store.getters['getTodoLength']
     },
-    storeTodo() {
-      return this.$store.state.todo
-    },
     todoNoCompl() {
       return this.$store.getters['getTodoNoCompleted']
     },
     filterTodo () {
       return this.$store.getters['getFilterTodo']
+    },
+    oneCompleted () {
+      const checkTodo =  this.$store.getters['getCheckCompleted']
+      if (checkTodo === undefined) {
+        return false
+      } else {
+        return true
+      }
     }
   },
   methods: {
     addItem() {
-      this.$store.dispatch('addTodoItem', {
-        id: ++this.todoID ,
-        text: this.todoInput,
-        completed: false,
-        edit: false
-      })
-      this.todoInput = ''
+      if (this.todoInput.trim() != 0) {
+        this.$store.dispatch('addTodoItem', {
+          id: ++this.todoID ,
+          text: this.todoInput,
+          completed: false,
+          edit: false
+        })
+        this.todoInput = ''
+      } else {
+        alert('Нельзя добавлять пустые задачи.')
+      }
+
     },
     editTodo (todo) {
       todo.edit = true
@@ -101,7 +111,7 @@ export default {
       this.$store.dispatch('todoDone', index)
     },
     filterActive (filter) {
-      this.$store.dispatch('updateFilter', filter)
+       this.$store.dispatch('updateFilter', filter)
     }
   },
   directives: {
@@ -147,5 +157,8 @@ export default {
   display: flex;
   justify-content: space-between;
   padding-top: 10px;
+}
+.hide {
+  display: none;
 }
 </style>

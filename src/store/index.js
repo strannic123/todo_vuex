@@ -11,7 +11,7 @@ export default new Vuex.Store({
   getters: {
     getTodo: state => state.todo,
     getTodoLength: state => state.todo.length,
-    getTodoNoCompleted: state => state.todo.filter(elem => elem.completed === false).length,
+    getTodoNoCompleted: state => state.todo.filter(elem => !elem.completed).length,
     getFilterTodo: state => {
       if (state.filter === 'all') {
         return state.todo
@@ -20,7 +20,12 @@ export default new Vuex.Store({
       }else if (state.filter === 'completed') {
         return state.todo.filter(elem => elem.completed)
       }
-    }
+    },
+    getCheckCompleted: state => state.todo.find(elem => {
+      if (elem.completed) {
+        return true
+      }
+    })
   },
   mutations: {
     ADD_TODO_ITEM(state, payload) {
