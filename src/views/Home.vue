@@ -15,11 +15,14 @@
 
   <div class="wrapper wrapper-todo-list">
     <div class="content">
-      <div class="todo-list" v-for="todo in storeTodo" :key="todo.id">
+      <div class="todo-list" v-for="(todo, index) in storeTodo" :key="todo.id">
         <div
             class="todo-item"
+            @click="todoDone(index)"
             @dblclick="editTodo(todo)"
             v-if="!todo.edit"
+            :class="{done: todo.completed}"
+
         >
           {{todo.text}}
           {{todo.id}}
@@ -74,6 +77,9 @@ export default {
     },
     editDone (todo) {
       todo.edit = false
+    },
+    todoDone (index) {
+      this.$store.dispatch('todoDone', index)
     }
   },
   directives: {
@@ -102,9 +108,18 @@ export default {
 .input-add,
 .input-edit {
   width: 100%;
-  padding: 0;
+  padding: 7px;
+
 }
 .todo-list {
   border: 1px solid darkgray;
+}
+.todo-item {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.done {
+  text-decoration: line-through
+;
 }
 </style>

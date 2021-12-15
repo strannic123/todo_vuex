@@ -17,14 +17,21 @@ export default new Vuex.Store({
     },
     EDIT_CHANGE(state, index) {
       state.todo[index].edit = !state.todo[index].edit
+    },
+    TODO_DONE (state, index) {
+      state.todo[index].completed = !state.todo[index].completed
     }
   },
   actions: {
     addTodoItem({commit}, payload) {
       commit('ADD_TODO_ITEM', payload)
     },
+    // подумать нужно ли ?
     editChange ({commit}, index) {
       commit('EDIT_CHANGE', index)
+    },
+    todoDone ({commit}, index) {
+      commit('TODO_DONE', index)
     }
   },
   modules: {
