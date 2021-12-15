@@ -44,7 +44,7 @@
   </div>
     <div class="wrapper nav">
       <div class="left-group">
-        <span>{{todoNoCompl}} Item left</span>
+        <span>{{todoNoCompl}} item left</span>
       </div>
       <div class="center-group">
         <router-link @click.native="filterActive('all')" to='/all' tag="button">All</router-link>
