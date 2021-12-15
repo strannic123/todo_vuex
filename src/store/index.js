@@ -9,7 +9,8 @@ export default new Vuex.Store({
   },
   getters: {
     getTodo: state => state.todo,
-    getTodoLength: state => state.todo.length
+    getTodoLength: state => state.todo.length,
+    getTodoNoCompleted: state => state.todo.filter(elem => elem.completed === false).length
   },
   mutations: {
     ADD_TODO_ITEM(state, payload) {

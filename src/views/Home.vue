@@ -40,6 +40,19 @@
       </div>
     </div>
   </div>
+    <div class="wrapper nav">
+      <div class="left-group">
+        <span>{{todoNoCompl}} Item left</span>
+      </div>
+      <div class="center-group">
+        <router-link to='/all' tag="button">All</router-link>
+        <router-link to='/active' tag="button">Active</router-link>
+        <router-link to='/completed' tag="button">Completed</router-link>
+      </div>
+      <div class="right-group">
+        <span>Clear Completed</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -60,6 +73,9 @@ export default {
     },
     storeTodo() {
       return this.$store.state.todo
+    },
+    todoNoCompl() {
+      return this.$store.getters['getTodoNoCompleted']
     }
   },
   methods: {
@@ -103,7 +119,7 @@ export default {
   flex-direction: column;
 }
 .wrapper {
-  width: 350px;
+  width: 450px;
 }
 .input-add,
 .input-edit {
@@ -119,7 +135,11 @@ export default {
   padding: 5px 10px;
 }
 .done {
-  text-decoration: line-through
-;
+  text-decoration: line-through;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
 }
 </style>
