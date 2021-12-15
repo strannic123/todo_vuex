@@ -1,5 +1,9 @@
 # gbs_test
 
+#  Todo на vue 
+#  Использовался vuex vue-router
+##  ![ Imgur ](https://i.imgur.com/dW2ovtc.gif)
+
 ## Project setup
 ```
 npm install
