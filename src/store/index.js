@@ -39,6 +39,9 @@ export default new Vuex.Store({
     },
     UPDATE_FILTER (state, filter) {
       state.filter = filter
+    },
+    DEL_ELEM_TODO_DONE(state) {
+      state.todo = state.todo.filter(el => !el.completed)
     }
   },
   actions: {
@@ -54,6 +57,9 @@ export default new Vuex.Store({
     },
     updateFilter ({commit}, filter) {
       commit('UPDATE_FILTER', filter)
+    },
+    delElemTodoDone ({ commit}) {
+        commit('DEL_ELEM_TODO_DONE')
     }
   },
   modules: {

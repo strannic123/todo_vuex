@@ -50,7 +50,11 @@
         <router-link @click.native="filterActive('completed')" to='/completed' tag="button">Completed</router-link>
       </div>
       <div class="right-group" >
-        <span :class="{'hide': !oneCompleted}">Clear Completed</span>
+        <span
+            class="right-btn"
+            :class="{'hide': !oneCompleted}"
+            @click="delTodoCompleted"
+            >Clear Completed</span>
       </div>
     </div>
   </div>
@@ -112,6 +116,9 @@ export default {
     },
     filterActive (filter) {
        this.$store.dispatch('updateFilter', filter)
+    },
+    delTodoCompleted () {
+      this.$store.dispatch('delElemTodoDone')
     }
   },
   directives: {
@@ -160,5 +167,8 @@ export default {
 }
 .hide {
   display: none;
+}
+.right-btn {
+  cursor: pointer;
 }
 </style>
