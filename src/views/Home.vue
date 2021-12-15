@@ -15,7 +15,7 @@
 
   <div class="wrapper wrapper-todo-list">
     <div class="content">
-      <div class="todo-list" v-for="(todo, index) in storeTodo" :key="todo.id">
+      <div class="todo-list" v-for="(todo, index) in filterTodo" :key="todo.id">
         <div
             class="todo-item"
             @click="todoDone(index)"
@@ -45,9 +45,9 @@
         <span>{{todoNoCompl}} Item left</span>
       </div>
       <div class="center-group">
-        <router-link to='/all' tag="button">All</router-link>
-        <router-link to='/active' tag="button">Active</router-link>
-        <router-link to='/completed' tag="button">Completed</router-link>
+        <router-link @click.native="filterActive('all')" to='/all' tag="button">All</router-link>
+        <router-link @click.native="filterActive('active')" to='/active' tag="button">Active</router-link>
+        <router-link @click.native="filterActive('completed')" to='/completed' tag="button">Completed</router-link>
       </div>
       <div class="right-group">
         <span>Clear Completed</span>
@@ -76,6 +76,9 @@ export default {
     },
     todoNoCompl() {
       return this.$store.getters['getTodoNoCompleted']
+    },
+    filterTodo () {
+      return this.$store.getters['getFilterTodo']
     }
   },
   methods: {
@@ -96,6 +99,9 @@ export default {
     },
     todoDone (index) {
       this.$store.dispatch('todoDone', index)
+    },
+    filterActive (filter) {
+      this.$store.dispatch('updateFilter', filter)
     }
   },
   directives: {
