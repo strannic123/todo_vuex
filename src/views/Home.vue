@@ -1,21 +1,23 @@
 <template>
   <div class="container">
    <div class="wrapper wrapper-input">
-     <div class="content">
-       <label >
+     <div class="content content-input-add">
+       <img :class="{'hide': todoId}" src="../assets/img/arrow-down.png" alt="">
          <input
              class="input-add"
              @keydown.enter="addItem"
              type="text"
              placeholder="What needs to be done ?"
              v-model="todoInput">
-       </label>
+
      </div>
    </div>
 
   <div class="wrapper wrapper-todo-list">
-    <div class="content">
+    <div class="content content-todo_items">
       <div class="todo-list" v-for="(todo, index) in filterTodo" :key="todo.id">
+        <img class="img-check" @click='todoDone(index)' v-if="todo.completed" src="../assets/img/check.png" alt="">
+        <img class="img-check" @click='todoDone(index)' v-if="!todo.completed" src="../assets/img/no-check.png" alt="">
         <div
             class="todo-item"
             @click="todoDone(index)"
@@ -144,18 +146,32 @@ export default {
 .wrapper {
   width: 450px;
 }
+
+
 .input-add,
 .input-edit {
   width: 100%;
   padding: 7px;
-
 }
+
+.input-add {
+  border: 1px solid #efefef;
+  box-sizing: border-box;
+  padding-left: 30px;
+}
+
 .todo-list {
-  border: 1px solid darkgray;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+}
+.todo-list:not(:last-child) {
+  border-bottom: 1px solid #efefef;
 }
 .todo-item {
   cursor: pointer;
   padding: 5px 10px;
+  text-align: left;
 }
 .done {
   text-decoration: line-through;
@@ -163,12 +179,60 @@ export default {
 .nav {
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
+  padding: 10px 5px;
+  border: 1px solid #efefef;
+  border-top: none;
+  box-sizing: border-box;
 }
 .hide {
   display: none;
 }
 .right-btn {
   cursor: pointer;
+}
+
+.img-check {
+  width: 25px;
+  height: fit-content;
+  padding-left: 7px;
+  cursor: pointer;
+}
+
+.content-todo_items {
+  border: 1px solid #efefef;
+}
+
+.center-group {
+  display: flex;
+  gap: 5px;
+}
+.center-group button{
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.center-group button:hover {
+  -webkit-box-shadow: 0px 0px 2px 0px rgb(181, 178, 178);
+  -moz-box-shadow: 0px 0px 2px 0px rgb(181, 178, 178);
+  box-shadow: 0px 0px 2px 0px rgb(181, 178, 178);
+}
+
+.router-link-exact-active {
+  -webkit-box-shadow: 0px 0px 2px 0px rgb(0, 0, 0);
+  -moz-box-shadow: 0px 0px 2px 0px rgb(0, 0, 0);
+  box-shadow: 0px 0px 2px 0px rgb(0, 0, 0);
+}
+
+.content-input-add {
+  position: relative;
+}
+
+.content-input-add img {
+  position: absolute;
+  width: 20px;
+  top: 7px;
+  left: 7px;
 }
 </style>
