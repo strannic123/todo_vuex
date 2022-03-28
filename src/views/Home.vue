@@ -15,12 +15,12 @@
 
   <div class="wrapper wrapper-todo-list">
     <div class="content content-todo_items">
-      <div class="todo-list" v-for="(todo, index) in filterTodo" :key="todo.id">
-        <img class="img-check" @click='todoDone(index)' v-if="todo.completed" src="../assets/img/check.png" alt="">
-        <img class="img-check" @click='todoDone(index)' v-if="!todo.completed" src="../assets/img/no-check.png" alt="">
+      <div class="todo-list" v-for="(todo) in filterTodo" :key="todo.id">
+        <img class="img-check" @click='todoDone(todo.id)' v-if="todo.completed" src="../assets/img/check.png" alt="">
+        <img class="img-check" @click='todoDone(todo.id)' v-if="!todo.completed" src="../assets/img/no-check.png" alt="">
         <div
             class="todo-item"
-            @click="todoDone(index)"
+            @click="todoDone(todo.id)"
             @dblclick="editTodo(todo)"
             v-if="!todo.edit"
             :class="{done: todo.completed}"
@@ -69,7 +69,6 @@ export default {
   data() {
     return {
       todoInput: '',
-      todoID: 0
     }
   },
   computed: {
@@ -95,7 +94,6 @@ export default {
     addItem() {
       if (this.todoInput.trim() != 0) {
         this.$store.dispatch('addTodoItem', {
-          id: ++this.todoID ,
           text: this.todoInput,
           completed: false,
           edit: false
